@@ -5,13 +5,21 @@ from read_data import *
 from tensorflow.python.framework import graph_util
 from tfrc import read_and_decode 
 
-batch_size = 256
-dropout = 0.2
+batch_size = 512
+dropout = 0.4
 
 
 
 train_path = "data/train.tfrecords"
 test_path = "data/test.tfrecords"
+
+def normalize(x):
+	u = np.mean(x,0)
+	sig = np.std(x,0)
+
+	new_x = (x - u) / sig
+
+	return new_x
 
 def get_train_test_data(train_path, test_path, batch_size):
 		ecgdata, label = read_and_decode(train_path)
@@ -36,8 +44,8 @@ config = tf.ConfigProto()
 #config.gpu_options.allow_growth = True
 version = tf.constant('v1.0.0', name='version')
 
-with tf.device('/gpu:1'):
-	model = build_network()
+#with tf.device('/gpu:1'):
+model = build_network()
 
 
 saver=tf.train.Saver()
@@ -46,7 +54,7 @@ config.gpu_options.per_process_gpu_memory_fraction = 0.4
 
 read_log = True
 prefix = 'mnbp_v1'
-epochs = 500000
+epochs = 25000
 predict = True
 
 if predict:
@@ -74,27 +82,34 @@ with tf.Session(config=config) as sess:
 	print 'training start...'
 	for step in range(epochs):
 		batch_x, batch_y = sess.run([train_data, train_label])
+		batch_x = normalize(batch_x)
+
 		sess.run(model.optimizer, feed_dict={model.x: batch_x, model.labels: batch_y, model.dropout: dropout})
 
 
-		if step % 10 == 0:	
-			loss = sess.run(model.acc, feed_dict={model.x: batch_x, model.labels: batch_y, model.dropout: dropout})
+		if step % 40 == 0:	
+			train_logits, loss = sess.run((model.logits, model.loss), feed_dict={model.x: batch_x, model.labels: batch_y, model.dropout: dropout})
 
 			test_x, test_y = sess.run([test_data, test_label])
-			mid, logits, val_loss, val_acc = sess.run([model.mid, model.logits, model.loss,model.acc], feed_dict={model.x: test_x, model.labels: test_y, model.dropout: 0})
-			rand_acc = np.mean(np.square(np.log1p(ph) - np.log1p(test_y)))
+			test_x = normalize(test_x)
+			mid, test_logits, val_loss = sess.run([model.mid, model.logits, model.loss], feed_dict={model.x: test_x, model.labels: test_y, model.dropout: 0})
 			
-			print "Epoch %d/%d - loss: %f \tval_loss: %f\tval_acc: %f\trand_acc: %f"  % (step+1,epochs, loss, val_loss, val_acc, rand_acc) 
+			#rand_acc = np.mean(np.square(np.log1p(ph) - np.log1p(test_y)))
+			acc = np.mean(np.square(np.log1p(train_logits) - np.log1p(batch_y)))
+			val_acc = np.mean(np.square(np.log1p(test_logits) - np.log1p(test_y)))
+			
+			print "Epoch %d/%d - loss: %f \tval_loss: %f\tacc: %f\tval_acc: %f"  % (step+1,epochs, loss, val_loss, acc, val_acc) 
+			#print "Epoch %d/%d - loss: %f \tval_loss: %f\tacc: %f\tval_acc: %f\trand_acc: %f"  % (step+1,epochs, loss, val_loss, acc, val_acc, rand_acc) 
 
 			
 
 		if step % 2000 == 0:	
-			print logits[10:30]
+			print test_logits[10:20]
 			print '\n'
-			print mid[10:30]
+			#print mid
 			print '\n'
-			print np.mean(logits,0)
-		if step % 500 == 199:	
+			print np.mean(test_logits,0)
+		if step % 1000 == 199:	
 			checkpoint_filepath='log/step-%d.ckpt' % step
 			saver.save(sess,checkpoint_filepath)
 			print '\n~~~~checkpoint saved!~~~~~\n'
@@ -105,9 +120,10 @@ with tf.Session(config=config) as sess:
 			with tf.gfile.FastGFile('./load_pb/%s_%d.pb' %(prefix,step), mode='wb') as f:
 				f.write(output_graph_def.SerializeToString())
 
-		if val_acc<0.042:
+		if val_acc<0.043:
 			pred_out = sess.run(model.logits, feed_dict={model.x: tx, model.dropout: 0})
-			np.savetxt("data/submit_test_%d.csv" % val_acc, pred_out,  delimiter=',', fmt='%f')
+			pred_out = normalize(pred_out)
+			np.savetxt("data/submit_test_%s.csv" % str(round(val_acc,3)), np.round(pred_out,3),  delimiter=',', fmt='%f')
 			
 
 	coord.request_stop()

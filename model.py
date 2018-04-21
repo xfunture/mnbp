@@ -26,41 +26,47 @@ class build_network():
 		self.dropout = tf.placeholder(tf.float32, name='dropout')
 
 		with tf.name_scope("cal_loss") as scope:
-				logits = self.network(self.x, self.dropout) 
+				logits, gamma = self.network(self.x, self.dropout) 
 				
-				base = np.array([125.3645,77.016500,1.606788,1.372469,2.768998])
+				base = np.array([126,78,1.6,1.3,2.7])
 				self.mid = logits
-				logits += base
+				self.logits = leaky_relu(logits)
 
-				opt = tf.train.AdamOptimizer(0.000001)
-				self.loss = tf.reduce_mean(tf.squared_difference(logits, self.labels))
+				opt = tf.train.AdamOptimizer(0.001)
+
+				#alpha = np.array([1000, 200, 10, 10, 20])
+				#x = tf.clip_by_value(self.labels / alpha, 1e-4, 1 - 1e-4)
+				#y = tf.clip_by_value(self.logits / alpha, 1e-4, 1 - 1e-4)
+
+				self.loss = tf.reduce_mean(tf.log1p(tf.squared_difference(self.logits, self.labels))) 
+				#self.loss = tf.reduce_mean(tf.squared_difference(self.logits, self.labels))
 				#self.acc2 = tf.reduce_mean(np.array([1,1,2,2,1]) * tf.square(tf.log1p(logits) - tf.log1p(self.labels)))
-				self.acc2 = tf.reduce_mean(tf.square(tf.log1p(logits) - tf.log1p(self.labels)))
-				self.acc = tf.reduce_mean(tf.square(tf.log1p(logits) - tf.log1p(self.labels)))
+				#self.acc = tf.reduce_mean(tf.square(tf.log1p(logits) - tf.log1p(self.labels)))
 
 				#tf.losses.mean_squared_error(labels, predictions)
 				self.optimizer = opt.minimize(self.loss)
-				#self.optimizer2 = opt.minimize(self.acc)
 		
-		self.logits = logits
 		
 	def network(self, x, dropout):
 
 		with tf.name_scope("mlp_network") as scope:
 				x = tf.layers.dense(x, 256)
+				x = tf.layers.dropout(x, rate=self.dropout)
 				x = tf.layers.dense(x, 128)
-				x = tf.nn.tanh(x)
+				x = tf.nn.relu(x)
 				x = tf.layers.dropout(x, rate=self.dropout)
 
 				x = tf.layers.dense(x, 128)
 				x = tf.layers.dense(x, 64)
-				x = tf.nn.tanh(x)
+				x = tf.nn.relu(x)
 				x = tf.layers.dropout(x, rate=self.dropout)
 				x = tf.layers.dense(x, 32)
 				x = tf.nn.relu(x)
 				x = tf.layers.dropout(x, rate=self.dropout)
 
 				logits = tf.layers.dense(x, units=5)
-		return logits
+				gamma = tf.layers.dense(x, units=5)
+				gamma = tf.log1p(tf.abs(gamma)) + 1
+		return logits, gamma
 
 
