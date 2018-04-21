@@ -3,3 +3,6 @@ log*
 *tfrecords
 data/submit*
 *csv
+/.idea
+*.xml
+*.pyc

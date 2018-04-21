@@ -52,7 +52,8 @@ saver=tf.train.Saver()
 config.gpu_options.per_process_gpu_memory_fraction = 0.4
 
 
-read_log = argv[1]
+#read_log = argv[1]
+read_log = False
 prefix = 'mnbp_v1'
 epochs = 25000
 predict = True
