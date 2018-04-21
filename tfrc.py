@@ -53,6 +53,15 @@ def create_record(x_path, y_path):
 	train_writer.close()
 	test_writer.close()
 
+def convert_label_to_multihot(labels, num_class):
+	# label with 7 class example: [3, 5]  ==>  [0,0,0,1,0,1,0]
+	multihot_label = [0] * num_class
+	for i in labels:
+		multihot_label[i] = 1
+
+	return multihot_label
+
+
 
 def read_and_decode(filename):
 	print 'read and decode data...'

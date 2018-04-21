@@ -1,71 +1,71 @@
-index,table+AF8-id,class,,,keyword,exclude+AF8-word
-0,4001,+iEB7oV85YCc-,+j3teplHPXzE-,,+j3teplHPXzE-,
-1,4001,+iEB7oV85YCc-,+Ti1eplHPXzE-,,+Ti1eplHPXzE-,
-2,4001,+iEB7oV85YCc-,+kc1eplHPXzE-,,+kc1eplHPXzE-,
-3,4001,+iEB7oV85YCc-,+a2NeOA-,,+ACI-+a2NeOA-,+gm9ZfQ-+ACI-,
-4,1001,+X8N1NVb+-,+a2NeOF/DdTVW/g-,,+a2NeOA-,
-5,1001,+X8N1NVb+-,+eqZgJ1/DUqiPx38T-,,+X8NSqI/HfxM-,
-6,1001,+X8N1NVb+-,+eqZgJ1/DUqiPx5Af-,,+X8NSqI/HkB8-,
-7,1001,+X8N1NVb+-,+UXZbg1/DdTVW/g-,,,+a2NeOA-
-8,0409,+dcVT8g-,+mtiIQFOLU/I-,,+mtiIQFOLU/I-,
-9,0409,+dcVT8g-,+gRFol1heU/I-,,+gRFol1heU/I-,
-10,0409,+dcVT8g-,+lhFcPnCO-,,+lhFcPnCO-,
-11,0409,+dcVT8g-,+iECBAg-,,+iECBAg-,
-12,0409,+dcVT8g-,+bLt1l04t-,,+bLt1l04t-,
-13,0409,+dcVT8g-,+Zypsu3WX-,,+Zypsu3WX-,
-14,0409,+dcVT8g-,+iEB81lBPmtg-,,+iEB81lBPmtg-,
-15,0409,+dcVT8g-,+X8OAjE+biEBODY2z-,,+X8OAjE+biEBODY2z-,
-16,0409,+dcVT8g-,+fNZcP3XFU/I-,,+fNZcP3XFU/I-,
-17,0409,+dcVT8g-,+ZyqJwV8CXjg-,,+ZyqJwV8CXjg-,
-18,0410,+dcVT8g-,+UlZbq06n-,,+UlZbq06n-,
-19,0410,+dcVT8g-,+Zy9UDg-,,+Zy9UDg-,
-20,0410,+dcVT8g-,+gQKAqoCdU/I-,,+gQKAqoCdU/I-,
-21,2229,,+ljNgJw-,,+ljNgJw-,
-22,2233,,+ljNgJw-,,+ljNgJw-,
-23,2231,,+ljNgJw-,,+ljNgJw-,
-24,2228,,+ljNgJw-,,+ljNgJw-,
-25,100010,,+ljNgJw-,,+ljNgJw-,
-26,799003,,+ljNgJw-,,+ljNgJw-,
-27,3430,,+ljNgJw-,,+ljNgJw-,
-28,769006,,+ljNgJw-,,+ljNgJw-,
-29,E39003,,+ljNgJw-,,+ljNgJw-,
-30,529001,,+ljNgJw-,,+ljNgJw-,
-31,269041,,+ljNgJw-,,+ljNgJw-,
-32,3868,,+ljNgJw-,,+ljNgJw-,
-33,300036,,+ljNgJw-,,+ljNgJw-,
-34,669017,,+ljNgJw-,,+ljNgJw-,
-35,300005,,+ljNgJw-,,+ljNgJw-,
-36,3429,,+ljNgJw-,,+ljNgJw-,
-37,3485,,+ljNgJw-,,+ljNgJw-,
-38,3195,,+ljNgJw-,,+ljNgJw-,
-39,709039,,+ljNgJw-,,+ljNgJw-,
-40,300004,,+ljNgJw-,,+ljNgJw-,
-41,459187,,+ljNgJw-,,+ljNgJw-,
-42,A49011,,+ljNgJw-,,+ljNgJw-,
-43,269042,,+ljNgJw-,,+ljNgJw-,
-44,30001,,+ljNgJw-,,+ljNgJw-,
-45,E19002,,+ljNgJw-,,+ljNgJw-,
-46,3196,,+ljNgJw-,,+ljNgJw-,
-47,319240,,+ljNgJw-,,+ljNgJw-,
-48,S39002,,+ljNgJw-,,+ljNgJw-,
-49,529002,,+ljNgJw-,,+ljNgJw-,
-50,459109,,+ljNgJw-,,+ljNgJw-,
-51,2381,,+ljNgJw-,,+ljNgJw-,
-52,T59007,,+ljNgJw-,,+ljNgJw-,
-53,2230,,+ljNgJw-,,+ljNgJw-,
-54,3191,,+ljNgJw-,,+ljNgJw-,
-55,3190,,+ljNgJw-,,+ljNgJw-,
-56,3194,,+ljNgJw-,,+ljNgJw-,
-57,300088,,+ljNgJw-,,+ljNgJw-,
-58,669028,,+ljNgJw-,,+ljNgJw-,
-59,300025,,+ljNgJw-,,+ljNgJw-,
-60,459247,,+ljNgJw-,,+ljNgJw-,
-61,E39002,,+ljNgJw-,,+ljNgJw-,
-62,669024,,+ljNgJw-,,+ljNgJw-,
-63,4307,,+ljNgJw-,,+ljNgJw-,
-64,319107,,+ljNgJw-,,+ljNgJw-,
-65,2382,,+ljNgJw-,,+ljNgJw-,
-66,3192,,+ljNgJw-,,+ljNgJw-,
-67,179107,,+ljNgJw-,,+ljNgJw-,
-68,979045,,+ljNgJw-,,+ljNgJw-,
-69,979044,,+ljNgJw-,,+ljNgJw-,
+index	table_id	class			keyword	exclude_word
+0	4001	血管弹性	轻度减弱		轻度减弱	
+1	4001	血管弹性	中度减弱		中度减弱	
+2	4001	血管弹性	重度减弱		重度减弱	
+3	4001	血管弹性	正常		正常,良好	
+4	1001	心电图	正常心电图		正常	
+5	1001	心电图	窦性心动过缓		心动过缓	
+6	1001	心电图	窦性心动过速		心动过速	
+7	1001	心电图	其它心电图			正常
+8	409	病史	高血压史		高血压史	
+9	409	病史	脑梗塞史		脑梗塞史	
+10	409	病史	阑尾炎		阑尾炎	
+11	409	病史	血脂		血脂	
+12	409	病史	治疗中		治疗中	
+13	409	病史	未治疗		未治疗	
+14	409	病史	血糖偏高		血糖偏高	
+15	409	病史	心肌供血不足		心肌供血不足	
+16	409	病史	糖尿病史		糖尿病史	
+17	409	病史	未见异常		未见异常	
+18	410	病史	剖宫产		剖宫产	
+19	410	病史	术后		术后	
+20	410	病史	脂肪肝史		脂肪肝史	
+21	2229		阳性		阳性	
+22	2233		阳性		阳性	
+23	2231		阳性		阳性	
+24	2228		阳性		阳性	
+25	100010		阳性		阳性	
+26	799003		阳性		阳性	
+27	3430		阳性		阳性	
+28	769006		阳性		阳性	
+29	E39003		阳性		阳性	
+30	529001		阳性		阳性	
+31	269041		阳性		阳性	
+32	3868		阳性		阳性	
+33	300036		阳性		阳性	
+34	669017		阳性		阳性	
+35	300005		阳性		阳性	
+36	3429		阳性		阳性	
+37	3485		阳性		阳性	
+38	3195		阳性		阳性	
+39	709039		阳性		阳性	
+40	300004		阳性		阳性	
+41	459187		阳性		阳性	
+42	A49011		阳性		阳性	
+43	269042		阳性		阳性	
+44	30001		阳性		阳性	
+45	E19002		阳性		阳性	
+46	3196		阳性		阳性	
+47	319240		阳性		阳性	
+48	S39002		阳性		阳性	
+49	529002		阳性		阳性	
+50	459109		阳性		阳性	
+51	2381		阳性		阳性	
+52	T59007		阳性		阳性	
+53	2230		阳性		阳性	
+54	3191		阳性		阳性	
+55	3190		阳性		阳性	
+56	3194		阳性		阳性	
+57	300088		阳性		阳性	
+58	669028		阳性		阳性	
+59	300025		阳性		阳性	
+60	459247		阳性		阳性	
+61	E39002		阳性		阳性	
+62	669024		阳性		阳性	
+63	4307		阳性		阳性	
+64	319107		阳性		阳性	
+65	2382		阳性		阳性	
+66	3192		阳性		阳性	
+67	179107		阳性		阳性	
+68	979045		阳性		阳性	
+69	979044		阳性		阳性	
