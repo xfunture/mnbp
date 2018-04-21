@@ -5,7 +5,7 @@ from read_data import *
 from tensorflow.python.framework import graph_util
 from tfrc import read_and_decode 
 
-batch_size = 512
+batch_size = 128
 dropout = 0.4
 
 
@@ -28,12 +28,12 @@ def get_train_test_data(train_path, test_path, batch_size):
 
 		train_data, train_label = tf.train.shuffle_batch([ecgdata, label],
 													batch_size=batch_size, capacity=50000,
-													num_threads=3,
+													#num_threads=3,
 													min_after_dequeue=1000)
 
 		test_data, test_label = tf.train.shuffle_batch([test_data_batch, test_label_batch],
-													batch_size=256, capacity=50000,
-													num_threads=3,
+													batch_size=128, capacity=50000,
+													#num_threads=3,
 													min_after_dequeue=1000)
 
 		return train_data, train_label, test_data, test_label 
@@ -52,7 +52,7 @@ saver=tf.train.Saver()
 config.gpu_options.per_process_gpu_memory_fraction = 0.4
 
 
-read_log = True
+read_log = argv[1]
 prefix = 'mnbp_v1'
 epochs = 25000
 predict = True
@@ -69,7 +69,7 @@ with tf.Session(config=config) as sess:
 
 	#tf.summary.FileWriter('log', sess.graph)
 
-	if read_log:			
+	if read_log == "log":			
 		with open("log/checkpoint",'r') as f1:
 				txt = f1.readline()
 				point = txt.strip().replace('model_checkpoint_path: ','').replace("\"",'')
@@ -87,7 +87,7 @@ with tf.Session(config=config) as sess:
 		sess.run(model.optimizer, feed_dict={model.x: batch_x, model.labels: batch_y, model.dropout: dropout})
 
 
-		if step % 40 == 0:	
+		if step % 10 == 0:	
 			train_logits, loss = sess.run((model.logits, model.loss), feed_dict={model.x: batch_x, model.labels: batch_y, model.dropout: dropout})
 
 			test_x, test_y = sess.run([test_data, test_label])
@@ -103,9 +103,8 @@ with tf.Session(config=config) as sess:
 
 			
 
-		if step % 2000 == 0:	
+		if step % 200 == 0:	
 			print test_logits[10:20]
-			print '\n'
 			#print mid
 			print '\n'
 			print np.mean(test_logits,0)
@@ -120,10 +119,19 @@ with tf.Session(config=config) as sess:
 			with tf.gfile.FastGFile('./load_pb/%s_%d.pb' %(prefix,step), mode='wb') as f:
 				f.write(output_graph_def.SerializeToString())
 
-		if val_acc<0.043:
-			pred_out = sess.run(model.logits, feed_dict={model.x: tx, model.dropout: 0})
-			pred_out = normalize(pred_out)
-			np.savetxt("data/submit_test_%s.csv" % str(round(val_acc,3)), np.round(pred_out,3),  delimiter=',', fmt='%f')
+		if step % 10 == 0 and val_acc<0.04:
+			tx = normalize(tx)
+			for i in range(0,9600,200):
+				px = tx[i:i+200]
+				res = sess.run(model.logits, feed_dict={model.x: px, model.dropout: 0})
+			
+				if i == 0:
+					pred_out = res
+				else:
+					pred_out = np.concatenate((pred_out, res))	
+
+			print pred_out.shape
+			np.savetxt("data/submit_v2_%s.csv" % str(round(val_acc,4)), np.round(pred_out,3),  delimiter=',', fmt='%f')
 			
 
 	coord.request_stop()
